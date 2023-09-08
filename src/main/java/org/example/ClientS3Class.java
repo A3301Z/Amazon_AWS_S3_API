@@ -8,7 +8,7 @@ import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 
 public class ClientS3Class {
-	public static void main(String[] args) {
+	public static void main(String[] args) throws InterruptedException {
 		CommandHandler.commandHandler();
 	}
 
