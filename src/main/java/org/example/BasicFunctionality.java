@@ -3,6 +3,7 @@ package org.example;
 import com.amazonaws.SdkClientException;
 import com.amazonaws.services.s3.model.*;
 
+import javax.swing.filechooser.FileSystemView;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
@@ -80,7 +81,8 @@ public class BasicFunctionality {
 		if (!ClientS3Class.makeS3Client().doesObjectExist(BUCKET, key)) {
 			System.out.println("Данный элемент отсутствует в хранилище.");
 		}
-		final File whereToDownloadAFile = new File("C:\\Users\\mrart\\Рабочий стол" + "\\" + key);
+		String desktopPath = FileSystemView.getFileSystemView().getHomeDirectory().getPath();
+		final File whereToDownloadAFile = new File(desktopPath + "\\" + key);
 
 		try (InputStream is = ClientS3Class.makeS3Client().getObject(new GetObjectRequest(BUCKET, key)).getObjectContent(); FileOutputStream fos = new FileOutputStream(whereToDownloadAFile)) {
 			byte[] buffer = new byte[1024];

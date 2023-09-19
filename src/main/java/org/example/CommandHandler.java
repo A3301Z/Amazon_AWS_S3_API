@@ -44,6 +44,9 @@ public class CommandHandler {
 							Укажите ключ файла.
 							___________________""");
 					String key = sc.nextLine() + BasicFunctionality.getFileExtension(pathToFile);
+
+					HashSumClass.createHashFile(key, pathToFile);
+
 					if (key.equalsIgnoreCase("назад")) {
 						System.out.println("\n" + cmdCommand);
 						break;
