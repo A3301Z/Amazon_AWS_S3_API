@@ -40,10 +40,11 @@ public class CommandHandler {
 							Укажите полный путь к файлу вместе с названием и расширением файла.
 							___________________________________________________________________""");
 					String pathToFile = sc.nextLine().trim();
-					System.out.println("""
-							Укажите ключ файла.
-							___________________""");
-					String key = sc.nextLine() + BasicFunctionality.getFileExtension(pathToFile);
+//					System.out.println("""
+//							Укажите ключ файла.   C:\Users\3301\Desktop\AmazonAWSApi.rar
+//							___________________""");
+//					String key = sc.nextLine() + BasicFunctionality.getFileName(pathToFile);
+					String key = BasicFunctionality.getFileName(pathToFile);
 
 					HashSumClass.createHashFile(key, pathToFile);
 

@@ -27,16 +27,21 @@ public class BasicFunctionality {
 	}
 
 	//  [List of files in the bucket]
-	protected static void listObjects() {
+	protected static List<String> listObjects() {
+		List<String> arrayList = new ArrayList<>();
 		ListObjectsRequest list = new ListObjectsRequest().withBucketName(BUCKET);
 		ObjectListing listing = ClientS3Class.makeS3Client().listObjects(list);
 		int counter = 1;
 		System.out.println("\n---> Список всех файлов в хранилище:");
-		for (S3ObjectSummary o : listing.getObjectSummaries()) {
-			System.out.println(counter + ") " + o.getKey());
-			counter++;
+		if (listing != null) {
+			for (S3ObjectSummary o : listing.getObjectSummaries()) {
+				System.out.println(counter + ") " + o.getKey());
+				counter++;
+				arrayList.add(counter + ") " + o.getKey());
+				return arrayList;
+			}
 		}
-		System.out.println();
+		return arrayList;
 	}
 
 	//  [Uploading files to the bucket in parts (5 megabytes)]
@@ -99,10 +104,8 @@ public class BasicFunctionality {
 		}
 	}
 
-	protected static String getFileExtension(String line) {
+	protected static String getFileName(String line) {
 		String[] split = line.split(Pattern.quote("\\"));
-		String lastWord = split[split.length - 1];
-		String[] splitLastWord = lastWord.split("\\.");
-		return "." + splitLastWord[splitLastWord.length - 1];
+		return split[split.length - 1];
 	}
 }
